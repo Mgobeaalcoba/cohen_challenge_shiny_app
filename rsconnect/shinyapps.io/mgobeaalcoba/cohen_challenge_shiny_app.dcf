@@ -1,0 +1,12 @@
+name: cohen_challenge_shiny_app
+title: cohen_challenge_shiny_app
+username: mgobeaalcoba
+account: mgobeaalcoba
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 9965133
+bundleId: 7718946
+url: https://mgobeaalcoba.shinyapps.io/cohen_challenge_shiny_app/
+version: 1
+asMultiple: FALSE
+asStatic: FALSE

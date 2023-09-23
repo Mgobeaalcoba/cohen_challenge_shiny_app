@@ -1,0 +1,32 @@
+       askpass      base64enc            bit          bit64          bslib         cachem     cellranger 
+     "askpass"    "base64enc"          "bit"        "bit64"        "bslib"       "cachem"   "cellranger" 
+           cli          clipr     commonmark          cpp11         crayon    credentials           curl 
+         "cli"        "clipr"   "commonmark"        "cpp11"       "crayon"  "credentials"         "curl" 
+          desc         digest       ellipsis          fansi        fastmap    fontawesome             fs 
+        "desc"       "digest"     "ellipsis"        "fansi"      "fastmap"  "fontawesome"           "fs" 
+      generics           gert             gh       gitcreds           glue            hms      htmltools 
+    "generics"         "gert"           "gh"     "gitcreds"         "glue"          "hms"    "htmltools" 
+        httpuv           httr          httr2            ini      jquerylib       jsonlite          later 
+      "httpuv"         "httr"        "httr2"          "ini"    "jquerylib"     "jsonlite"        "later" 
+     lifecycle      lubridate       magrittr        memoise           mime        openssl        packrat 
+   "lifecycle"    "lubridate"     "magrittr"      "memoise"         "mime"      "openssl"      "packrat" 
+        pillar      pkgconfig    prettyunits       progress       promises          purrr             R6 
+      "pillar"    "pkgconfig"  "prettyunits"     "progress"     "promises"        "purrr"           "R6" 
+      rappdirs           Rcpp          readr         readxl        rematch           renv          rlang 
+    "rappdirs"         "Rcpp"        "readr"       "readxl"      "rematch"         "renv"        "rlang" 
+     rprojroot      rsconnect     rstudioapi          rvest           sass        selectr          shiny 
+   "rprojroot"    "rsconnect"   "rstudioapi"        "rvest"         "sass"      "selectr"        "shiny" 
+   sourcetools        stringi        stringr            sys         tibble     tidyselect   tidytuesdayR 
+ "sourcetools"      "stringi"      "stringr"          "sys"       "tibble"   "tidyselect" "tidytuesdayR" 
+    timechange           tzdb        usethis           utf8          vctrs          vroom        whisker 
+  "timechange"         "tzdb"      "usethis"         "utf8"        "vctrs"        "vroom"      "whisker" 
+         withr           xml2         xtable           yaml            zip           base           boot 
+       "withr"         "xml2"       "xtable"         "yaml"          "zip"         "base"         "boot" 
+         class        cluster      codetools       compiler       datasets        foreign       graphics 
+       "class"      "cluster"    "codetools"     "compiler"     "datasets"      "foreign"     "graphics" 
+     grDevices           grid     KernSmooth        lattice           MASS         Matrix        methods 
+   "grDevices"         "grid"   "KernSmooth"      "lattice"         "MASS"       "Matrix"      "methods" 
+          mgcv           nlme           nnet       parallel          rpart        spatial        splines 
+        "mgcv"         "nlme"         "nnet"     "parallel"        "rpart"      "spatial"      "splines" 
+         stats         stats4       survival          tcltk          tools          utils 
+       "stats"       "stats4"     "survival"        "tcltk"        "tools"        "utils" 
