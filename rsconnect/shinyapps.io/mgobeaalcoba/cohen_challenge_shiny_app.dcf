@@ -5,7 +5,7 @@ account: mgobeaalcoba
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 9968015
-bundleId: 7720152
+bundleId: 7721110
 url: https://mgobeaalcoba.shinyapps.io/cohen_challenge_shiny_app/
 version: 1
 asMultiple: FALSE
