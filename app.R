@@ -1,4 +1,6 @@
 library(shiny)
+library(ggplot2)
+library(dplyr) 
 
 # Data to be used
 dataset_csv <- read.csv("languages_dataset_cleaning.csv")
@@ -20,16 +22,16 @@ filtered_data$number_of_users <- ifelse(is.na(filtered_data$number_of_users), -1
 q_users <- quantile(vector_number_of_users, probs = c(0.25, 0.5, 0.75))
 q_repos <- quantile(vector_github_language_repos, probs = c(0.25, 0.5, 0.75))
 
-# Los cuartiles están almacenados en q_users y q_repos
-# Imprimir cuartiles por consola
-cat("Cuartiles de number_of_users:", q_users, "\n")
-cat("Cuartiles de github_language_repos:", q_repos, "\n")
-cat(q_users[1],"\n")
-cat(q_users[2],"\n")
-cat(q_users[3],"\n")
-cat(q_repos[1],"\n")
-cat(q_repos[2],"\n")
-cat(q_repos[3],"\n")
+# # Los cuartiles están almacenados en q_users y q_repos
+# # Imprimir cuartiles por consola
+# cat("Cuartiles de number_of_users:", q_users, "\n")
+# cat("Cuartiles de github_language_repos:", q_repos, "\n")
+# cat(q_users[1],"\n")
+# cat(q_users[2],"\n")
+# cat(q_users[3],"\n")
+# cat(q_repos[1],"\n")
+# cat(q_repos[2],"\n")
+# cat(q_repos[3],"\n")
 
 # Función para categorizar por cantidad de usuarios y cantidad de repos
 categorize_by_quartiles <- function(value, quartiles) {
@@ -53,7 +55,7 @@ filtered_data$category_by_users <- sapply(filtered_data$number_of_users, categor
 filtered_data$category_by_repos <- sapply(filtered_data$github_language_repos, categorize_by_quartiles, quartiles = q_repos)
 
 # Obtener y visualizar los nombres de las columnas para comprobar que se hayan creado las nuevas columnas:
-cat(colnames(filtered_data),"\n")
+# cat(colnames(filtered_data),"\n")
 
 # Define UI for application that draws a histogram
 ui <- fluidPage(
