@@ -60,6 +60,10 @@ To use the Shiny App:
 <img src="./images/shiny_app_1.png">
 <img src="./images/shiny_app_2.png">
 
+## Host
+
+[ShinyApps.io](https://mgobeaalcoba.shinyapps.io/cohen_challenge_shiny_app/): The Shiny App can be used here. 
+
 ## Author
 
 Mariano Gobea Alcoba
