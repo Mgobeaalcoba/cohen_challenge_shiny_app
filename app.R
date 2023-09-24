@@ -41,16 +41,6 @@ q_users <-
 q_repos <-
   quantile(vector_github_language_repos, probs = c(0.25, 0.5, 0.75))
 
-# # Los cuartiles están almacenados en q_users y q_repos
-# # Imprimir cuartiles por consola
-# cat("Cuartiles de number_of_users:", q_users, "\n")
-# cat("Cuartiles de github_language_repos:", q_repos, "\n")
-# cat(q_users[1],"\n")
-# cat(q_users[2],"\n")
-# cat(q_users[3],"\n")
-# cat(q_repos[1],"\n")
-# cat(q_repos[2],"\n")
-# cat(q_repos[3],"\n")
 
 # Función para categorizar por cantidad de usuarios y cantidad de repos
 categorize_by_quartiles <- function(value, quartiles) {
@@ -107,13 +97,15 @@ ui <- fluidPage(
                    inputId = "category_by_repos",
                    label = "Select category according to the number of repositories in Github:",
                    choices = unique(filtered_data$category_by_repos),
-                   selected = unique(filtered_data$category_by_repos)[1]
+                   selected = unique(filtered_data$category_by_repos)[1],
+                   multiple = TRUE
                  ),
                  selectInput(
                    inputId = "github_language_type",
                    label = "Select github language type:",
                    choices = unique(filtered_data$github_language_type),
-                   selected = unique(filtered_data$github_language_type)[1]
+                   selected = unique(filtered_data$github_language_type)[1],
+                   multiple = TRUE
                  )
                ),
                mainPanel(plotOutput("distPlot"))
@@ -127,11 +119,32 @@ ui <- fluidPage(
                    inputId = "github_language_type2",
                    label = "Select github language type:",
                    choices = unique(filtered_data$github_language_type),
-                   selected = unique(filtered_data$github_language_type)[1]
+                   selected = unique(filtered_data$github_language_type)[1],
+                   multiple = TRUE
+                 ), 
+                 sliderInput(
+                   inputId = "appeared",
+                   label = "Last activity registered by the programming language:",
+                   min = min(top_50_languages$appeared),
+                   max = max(top_50_languages$appeared),
+                   value = max(top_50_languages$appeared),
+                   step = 7
                  )
                ),
                mainPanel(plotOutput("barPlot"))
-             ))
+             )),
+    tabPanel("About", 
+             p(HTML("This is a Shiny Application built to a Cohen Aliados Financieros's challenge by Mariano Gobea Alcoba.")),
+             p(HTML("To prepare it, first select a dataset of my interest among those available in TidyTuesday and I have downloaded it to my project using the code written in download_dataset.R")),
+             p(HTML("Once I had the dataset in my possession, I went through a process of debugging and cleaning it in order to remove junk information. The mime can be observed in cleaning_dataset.R")),
+             p(HTML("Then I decided to do a brief and summarized EDA in order to know my dataset, its main columns and number of rows, how much null or n/a data I had in each of them. It can be found in eda.R")),
+             p(HTML("Code for the app is available on my <a href= https://github.com/Mgobeaalcoba/cohen_challenge_shiny_app>Github</a>")),
+             p(HTML("I set out to answer the following two questions in this Shiny App:")),
+             p(HTML("1. What are the 10 most used programming languages?")),
+             p(HTML("2. How many programming languages were created each year? And what was the most fruitful year?")),
+             p(HTML("</br>For any questions or inquiries, you can find me at <a href=https://www.linkedin.com/in/mariano-gobea-alcoba//> my LinkedIn profile</a> or on <a href = https://github.com/Mgobeaalcoba>my Github profile</a>."))
+    )
+    
   )
 )
 
@@ -153,17 +166,17 @@ server <- function(input, output) {
     hist_data <-
       subset(
         filtered_data,
-        github_language_type == GLTYPESelected &
-          category_by_repos == CBREPOSelected
+        github_language_type %in% GLTYPESelected &
+          category_by_repos %in% CBREPOSelected
       )
     
-    p <- ggplot(data = hist_data, aes(x = appeared)) +
+    p <- ggplot(data = hist_data, 
+                aes(x = appeared)) +
       geom_histogram(
         breaks = bins,
         fill = 'darkgray',
         color = 'white',
         binwidth = diff(bins)[1],
-        # Ancho de los bins
         boundary = min(bins) - diff(bins)[1] / 2
       ) +
       xlab('Appeared year') +
@@ -179,21 +192,29 @@ server <- function(input, output) {
     #The "Selected" variables will serve to subset out data in function of
     # the input: they are a way of storing the input selected
     GLTYPESelected <- input$github_language_type2
+    APPEAREDSelected <- input$appeared
     
     # generate a subset for interactive filter:
     hist_data2 <-
       subset(
         top_50_languages,
-        github_language_type == GLTYPESelected 
+        github_language_type %in% GLTYPESelected &
+          appeared <= APPEAREDSelected
       )
     
     # Crear un gráfico de barras utilizando ggplot2
-    q <- ggplot(hist_data2, aes(x = reorder(title, -github_language_repos), y = github_language_repos)) +
-      geom_bar(stat = "identity", fill = "blue") +
+    q <- ggplot(hist_data2, 
+                aes(x = reorder(title, -github_language_repos), 
+                    y = github_language_repos)) +
+      geom_bar(stat = "identity", 
+               fill = "darkgray") +
       xlab("Lenguaje de Programación") +
-      ylab("Número de Repositorios en GitHub") +
-      ggtitle("20 Lenguajes de Programación con más Repositorios en GitHub") +
-      theme(axis.text.x = element_text(angle = 45, hjust = 1))  # Rotar etiquetas del eje x si es necesario  # Rotar etiquetas del eje x si es necesario
+      ylab("Número de Repositorios en GitHub (en millones)") +
+      ggtitle("50 Lenguajes de Programación con más Repositorios en GitHub") +
+      theme(axis.text.x = element_text(angle = 45, hjust = 1), 
+            panel.background = element_rect(fill = "white")) +  # Rotar etiquetas del eje x si es necesario  # Rotar etiquetas del eje x si es necesario
+      scale_y_continuous(labels = scales::comma_format(scale = 1e-6)) 
+    
     
     print(q)
   })
