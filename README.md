@@ -1,5 +1,7 @@
 # Shiny App: Programming Language Analysis
 
+![Visitors](https://api.visitorbadge.io/api/visitors?path=https%3A%2F%2Fgithub.com%2FMgobeaalcoba%2Fcohen_challenge_shiny_app&label=Visitors&countColor=%23263759)
+
 ## Overview
 
 This Shiny App is designed to provide insights into programming languages, their origins, and various statistics related to them. It analyzes a dataset of programming languages and their attributes, allowing users to explore and visualize the data interactively.
